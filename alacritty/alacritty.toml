@@ -1,0 +1,29 @@
+[general]
+import = ["~/.config/alacritty/cat_mocha.toml"]
+
+[window]
+opacity = 0.9
+padding.x = 10
+padding.y = 10
+decorations = "Full"
+decorations_theme_variant = "Light" # "Dark"
+
+[font]
+normal = { family = "CaskaydiaCove Nerd Font", style = "Bold" }
+bold = { family = "CaskaydiaCove Nerd Font", style = "Bold" }
+italic = { family = "CaskaydiaCove Nerd Font", style = "Italic" }
+bold_italic = { family = "CaskaydiaCove Nerd Font", style = "Bold Italic" }
+size = 12.5
+
+[terminal.shell]
+program = "/usr/bin/fish"
+args = ["--login"]  	
+
+[cursor]
+blink_interval = 500  # Adjust blinking speed in milliseconds
+blink_timeout = 0     # Time after which cursor stops blinking; 0 disables timeout
+
+[cursor.style]
+shape = "Underline"   # Options: "Block", "Underline", "Beam"
+blinking = "Always"   # Options: "Never", "Off", "On", "Always"
+

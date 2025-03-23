@@ -1,0 +1,34 @@
+#!/bin/bash
+
+WALLPAPER_DIR="$HOME/Pictures/"
+INTERVAL=90
+SLIDESHOW_PID_FILE="$HOME/.wallpaper_slideshow_pid"
+
+if [ -f "$SLIDESHOW_PID_FILE" ]; then
+  # Slideshow is running, stop it
+  SLIDESHOW_PID=$(cat "$SLIDESHOW_PID_FILE")
+  if ps -p "$SLIDESHOW_PID" > /dev/null; then
+    kill "$SLIDESHOW_PID"
+    notify-send "Slideshow stopped."
+    echo "Slideshow stopped."
+  else
+    echo "Slideshow PID not found, possibly already stopped."
+  fi
+  rm "$SLIDESHOW_PID_FILE"
+else
+  # Slideshow is not running, start it
+  (
+    while true; do
+      WALLPAPER=$(find "$WALLPAPER_DIR" -type f | shuf -n 1)
+      nitrogen --set-zoom-fill "$WALLPAPER"
+      sleep $INTERVAL
+    done
+  ) &
+  SLIDESHOW_PID=$!
+  echo "$SLIDESHOW_PID" > "$SLIDESHOW_PID_FILE"
+  notify-send "Slideshow started."
+  echo "Slideshow started."
+
+fi
+
+exit 0

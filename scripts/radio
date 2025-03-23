@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# Check if MPV is running with the specified URL
+if pgrep -f "mpv --no-video https://stream.srg-ssr.ch/rsc_de/aacp_96.m3u" > /dev/null; then
+    echo "radio is running. Stopping it..."
+    notify-send -t 1200 "radio is running. Stopping it..."
+    pkill -f "mpv --no-video https://stream.srg-ssr.ch/rsc_de/aacp_96.m3u"
+else
+    echo "radio is not running. Starting it..."
+    notify-send -t 1200 "radio is not running. Starting it..."
+    mpv --no-video https://stream.srg-ssr.ch/rsc_de/aacp_96.m3u &
+fi

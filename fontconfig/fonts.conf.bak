@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE fontconfig SYSTEM "fonts.dtd">
+<fontconfig>
+
+  <!-- 🔹 Set default fonts for better rendering -->
+  <alias>
+    <family>serif</family>
+    <prefer>
+      <family>Noto Serif</family>
+    </prefer>
+  </alias>
+  <alias>
+    <family>sans-serif</family>
+    <prefer>
+      <family>Noto Sans</family>
+    </prefer>
+  </alias>
+  <alias>
+    <family>monospace</family>
+    <prefer>
+      <family>Noto Sans Mono</family>
+    </prefer>
+  </alias>
+
+  <!-- 🔹 Force Firefox & Brave to use Bold Fonts -->
+  <match target="pattern">
+    <test name="family">
+      <string>Noto Sans</string>
+    </test>
+    <edit name="family" mode="assign">
+      <string>Noto Sans Bold</string>
+    </edit>
+  </match>
+
+  <!-- 🔹 Force Bangla fonts for Bangla text -->
+  <match>
+    <test name="lang" compare="contains">
+      <string>bn</string>
+    </test>
+    <edit name="family" mode="prepend">
+      <string>Noto Sans Bengali</string>
+    </edit>
+  </match>
+
+  <!-- 🔹 Fix Emoji Display in All Apps -->
+  <alias>
+    <family>serif</family>
+    <prefer>
+      <family>Noto Color Emoji</family>
+    </prefer>
+  </alias>
+  <alias>
+    <family>sans-serif</family>
+    <prefer>
+      <family>Noto Color Emoji</family>
+    </prefer>
+  </alias>
+  <alias>
+    <family>monospace</family>
+    <prefer>
+      <family>Noto Color Emoji</family>
+    </prefer>
+  </alias>
+
+  <!-- 🔹 Improve Font Rendering -->
+  <match target="font">
+    <edit name="antialias" mode="assign">
+      <bool>true</bool>
+    </edit>
+    <edit name="hinting" mode="assign">
+      <bool>true</bool>
+    </edit>
+    <edit name="hintstyle" mode="assign">
+      <const>hintfull</const>
+    </edit>
+    <edit name="rgba" mode="assign">
+      <const>rgb</const>
+    </edit>
+    <edit name="lcdfilter" mode="assign">
+      <const>lcddefault</const>
+    </edit>
+  </match>
+
+    <match target="font">
+    <edit mode="assign" name="antialias"><bool>true</bool></edit>
+    <edit mode="assign" name="hinting"><bool>true</bool></edit>
+    <edit mode="assign" name="hintstyle"><const>hintfull</const></edit>
+    <edit mode="assign" name="rgba"><const>rgb</const></edit>
+  </match>
+
+</fontconfig>

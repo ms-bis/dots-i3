@@ -1,0 +1,139 @@
+# Sway config file
+set $mod Mod4
+
+# Font
+font pango:CaskaydiaCove Bold 10
+
+# Wallpaper
+exec_always swaybg -i /home/msbis/Pictures/jeremy-bishop-b_Iz9tkrw6A-unsplash.jpg
+
+# Autotiling
+exec_always autotiling
+
+# Notifications
+exec_always dunst
+
+# Polkit Authentication Agent
+exec_always /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+
+# Screen Locking
+exec_always swayidle -w timeout 300 'swaylock -f -c 000000' before-sleep 'swaylock -f -c 000000'
+
+# Network Manager Applet
+exec_always nm-applet --indicator
+
+# Volume Control
+# bindsym XF86AudioRaiseVolume exec pamixer --increase 10
+# bindsym XF86AudioLowerVolume exec pamixer --decrease 10
+bindsym XF86AudioMute exec pamixer --toggle-mute
+bindsym XF86AudioMicMute exec pamixer --source-toggle-mute
+
+bindsym ctrl+1 exec volume down
+bindsym ctrl+2 exec volume up
+bindsym ctrl+3 exec volume mute
+
+# Floating windows
+floating_modifier $mod
+
+# Tiling drag
+# tiling_drag modifier titlebar
+
+# Start applications
+bindsym $mod+Return exec alacritty
+bindsym $mod+e exec thunar
+
+# Kill focused window
+bindsym $mod+q kill
+
+# Program launcher (Rofi)
+# bindsym $mod+d exec wofi --show drun
+# bindsym $mod+x exec rofi -show power-menu
+
+bindsym $mod+d exec --no-startup-id /home/msbis/.config/rofi/launchers/type-1/launcher.sh
+bindsym $mod+x exec --no-startup-id /home/msbis/.config/rofi/powermenu/type-1/powermenu.sh
+
+# Clipboard manager
+exec_always clipmenud
+bindsym $mod+c exec --no-startup-id CM_LAUNCHER=cs clipmenu
+
+# Focus and move windows
+bindsym $mod+j focus left
+bindsym $mod+k focus down
+bindsym $mod+l focus up
+bindsym $mod+semicolon focus right
+
+bindsym $mod+Shift+j move left
+bindsym $mod+Shift+k move down
+bindsym $mod+Shift+l move up
+bindsym $mod+Shift+semicolon move right
+
+# Splits
+bindsym $mod+h split h
+bindsym $mod+v split v
+
+# Fullscreen
+bindsym $mod+f fullscreen toggle
+
+# Layouts
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+
+# Toggle floating
+bindsym $mod+Shift+space floating toggle
+
+# Workspaces
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+
+bindsym $mod+1 workspace number $ws1
+bindsym $mod+2 workspace number $ws2
+bindsym $mod+3 workspace number $ws3
+bindsym $mod+4 workspace number $ws4
+bindsym $mod+5 workspace number $ws5
+bindsym $mod+6 workspace number $ws6
+bindsym $mod+7 workspace number $ws7
+bindsym $mod+8 workspace number $ws8
+bindsym $mod+9 workspace number $ws9
+bindsym $mod+0 workspace number $ws10
+
+# Reload and restart
+bindsym $mod+Shift+c reload
+bindsym $mod+Shift+r restart
+
+# Exit Sway
+bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit Sway? This will end your Wayland session.' -B 'Yes, exit Sway' 'swaymsg exit'
+
+# Bar configuration
+bar {
+    font pango:FontAwesome Bold 10
+    status_command i3status
+    colors {
+        background #1c1c1c
+        statusline #f8f8f2
+        focused_workspace  #1c1c1c #f8f8f2 #1c1c1c
+    }
+}
+
+# Gaps
+gaps inner 5
+gaps outer 5
+
+# Window borders
+for_window [class=".*"] border pixel 2
+# Focused window (White border, White background, Black text, White indicator)
+client.focused #ffffff #ffffff #000000 #ffffff
+
+# Unfocused window (Gray border, Gray background, Light gray text, Gray indicator)
+client.unfocused #444444 #444444 #bbbbbb #444444
+
+# Urgent window (White border, White background, Black text, White indicator)
+client.urgent #ffffff #ffffff #000000 #ffffff
+
