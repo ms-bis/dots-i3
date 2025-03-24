@@ -8,10 +8,10 @@ logging.basicConfig(level=logging.DEBUG, format="%(asctime)s - %(message)s")
 
 # Define app-to-icon mapping
 APP_ICONS = {
-    "firefox": " ",
-    "chrome": " ",
+    "firefox": "󰈹 ",
+    "chrome": " ",
     "brave-browser": " ",
-    "thorium-browser": " ",
+    "thorium-browser": " ",
     "telegram-desktop": " ",
     "code": " ",
     "kitty": " ",
@@ -19,8 +19,8 @@ APP_ICONS = {
     "gnome-terminal": " ",
     "konsole": " ",
     "spotify": " ",
-    "vlc": " ",
-    "mpv": " ",
+    "vlc": "󰕼 ",
+    "mpv": " ",
     "thunar": " ",
     "nautilus": " ",
     "pcmanfm": " ",
