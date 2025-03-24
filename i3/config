@@ -112,7 +112,10 @@ bindsym $mod+h split h
 
 # split in vertical orientation
 bindsym $mod+v split v
+bindsym $mod+p exec pavucontrol
+for_window [class="pavucontrol"] floating enable
 
+bindsym $mod+Tab focus next
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
 
