@@ -112,7 +112,9 @@ bindsym $mod+h split h
 
 # split in vertical orientation
 bindsym $mod+v split v
-bindsym $mod+p exec pavucontrol
+
+# bindsym $mod+p exec pavucontrol
+bindsym $mod+p exec --no-startup-id pavucontrol
 for_window [class="pavucontrol"] floating enable
 
 bindsym $mod+Tab focus next
