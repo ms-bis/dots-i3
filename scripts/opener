@@ -1,0 +1,98 @@
+#!/bin/bash
+
+file_type=$(file --mime-type -b "$1")
+echo "Detected MIME type: $file_type"
+
+# Handle video files
+case $file_type in
+    video/*)
+        echo "Opening with mpv..."
+        mpv "$1"
+        ;;
+    
+    # Handle image files
+    image/*)
+        echo "Opening with feh..."
+        feh "$1"
+        ;;
+    
+    # Handle audio files
+    audio/*)
+        echo "Opening with mpv (audio)..."
+        mpv "$1"  # You can use another audio player if preferred, like `vlc` or `ncmpcpp`
+        ;;
+    
+    # Handle PDF files
+    application/pdf)
+        echo "Opening with zathura..."
+        zathura "$1"  # You can use `evince` or another PDF viewer
+        ;;
+    
+    # Handle text files (including markdown, config files, etc.)
+    text/*)
+        echo "Opening with nvim in alacritty..."
+        alacritty -e nvim "$1"
+        ;;
+    
+    # Handle archives (zip, rar, tar, etc.)
+    application/zip)
+        echo "Opening with unzip..."
+        unzip "$1" -d "${1%.*}"  # Extract to the folder with the same name as the archive
+        ;;
+    application/x-rar)
+        echo "Opening with unrar..."
+        unrar x "$1"
+        ;;
+    application/x-tar|application/x-gzip|application/x-bzip2)
+        echo "Opening with tar..."
+        tar -xf "$1"
+        ;;
+    
+    # Handle markdown files
+    text/markdown|text/x-markdown)
+        echo "Opening with nvim (markdown)..."
+        alacritty -e nvim "$1"
+        ;;
+    
+    # Handle script files (bash, python, etc.)
+    application/x-shellscript)
+        echo "Opening with nvim (script)..."
+        alacritty -e nvim "$1"
+        ;;
+    
+    # Handle HTML files
+    text/html)
+        echo "Opening with firefox..."
+        thorium "$1"  # You can also use `chromium` or another browser
+        ;;
+    
+    # Handle Word documents (docx)
+    application/vnd.openxmlformats-officedocument.wordprocessingml.document)
+        echo "Opening with libreoffice..."
+        libreoffice --writer "$1"
+        ;;
+    
+    # Handle Excel files (xlsx)
+    application/vnd.openxmlformats-officedocument.spreadsheetml.sheet)
+        echo "Opening with libreoffice calc..."
+        libreoffice --calc "$1"
+        ;;
+    
+    # Handle other office files (pptx, odt, etc.)
+    application/vnd.openxmlformats-officedocument.presentationml.presentation)
+        echo "Opening with libreoffice impress..."
+        libreoffice --impress "$1"
+        ;;
+    
+    # Handle ePub files
+    application/epub+zip)
+        echo "Opening with calibre..."
+        calibre "$1"  # You can also use `fbreader` or other ebook readers
+        ;;
+    
+    # Default handler for unsupported file types
+    *)
+        echo "Opening with xdg-open..."
+        xdg-open "$1"
+        ;;
+esac

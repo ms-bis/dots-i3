@@ -19,6 +19,7 @@ APP_ICONS = {
     "gnome-terminal": " ",
     "konsole": " ",
     "spotify": " ",
+    "simplescreenrecorder": " ",
     "vlc": "󰕼 ",
     "mpv": " ",
     "thunar": " ",

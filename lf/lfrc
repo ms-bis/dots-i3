@@ -60,10 +60,7 @@ cmd trash ${{
 }}
 
 cmd open &{{
-	case $(file --mime-type -Lb $f) in
-		text/*) lf -remote "send $id \$nvim \$fx";;
-		*) xdg-open "$f"
-	esac
+    opener "$f"  # Use your script to open the file
 }}
 
 cmd on-select &{{
