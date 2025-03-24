@@ -8,6 +8,7 @@ set sixel true
 set rulerfmt "%d  |%a  |%p  |\033[7;31m %m \033[0m  |\033[7;33m %c \033[0m  |\033[7;35m %s \033[0m  |\033[7;34m %f \033[0m  |%i/%t"
 set relativenumber
 set shell fish
+# set drawbox
 
 set previewer ctpv
 set cleaner ctpvclear
@@ -129,6 +130,7 @@ map bg setwallpaper
 map C clear
 
 # Movement
+map gf cd /run/media/msbis/
 map gc cd ~/.config
 map gD cd ~/Documents
 map gd cd ~/Downloads
