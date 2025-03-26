@@ -8,34 +8,37 @@ logging.basicConfig(level=logging.DEBUG, format="%(asctime)s - %(message)s")
 
 # Define app-to-icon mapping
 APP_ICONS = {
-    "firefox": "󰈹 ",
-    "chrome": " ",
-    "brave-browser": " ",
-    "thorium-browser": " ",
-    "fdm": " ",
-    "telegram-desktop": " ",
-    "code": " ",
-    "xterm": " ",
-    "alacritty": " ",
-    "gnome-terminal": " ",
-    "konsole": " ",
-    "spotify": " ",
-    "simplescreenrecorder": " ",
-    "vlc": "󰕼 ",
-    "mpv": "󰕼 ",
-    "thunar": " ",
-    "nautilus": " ",
-    "pcmanfm": " ",
-    "slack": " ",
-    "thunderbird": " ",
-    "obsidian": " ",
-    "libreoffice": " ",
-    "steam": " ",
+    "firefox": " 󰈹 ",
+    "chrome": "  ",
+    "brave-browser": "  ",
+    "thorium-browser": "  ",
+    "chromium": "  ",
+    "fdm": "  ",
+    "telegram-desktop": "  ",
+    "code": "   ",
+    "xterm": "   ",
+    "alacritty": "   ",
+    "gnome-terminal": "   ",
+    "konsole": "   ",
+    "spotify": "   ",
+    "pavucontrol": "   ",
+    "simplescreenrecorder": "   ",
+    "vlc": " 󰕼 ",
+    "mpv": " 󰕼 ",
+    "thunar": "  ",
+    "nemo": "  ",
+    "nautilus": "  ",
+    "pcmanfm": "  ",
+    "slack": "  ",
+    "thunderbird": "  ",
+    "obsidian": "  ",
+    "libreoffice": "  ",
+    "lutris": "   ",
     # Add editor icons for Neovim, Vim, and Emacs
-    "neovim": " ",
-    "vim": " ",
-    "emacs": " ",
-    "kate": " ",
+    "neovim": "   ",
+    "vim": "   ",
+    "emacs": "   ",
+    "kate": "   ",
 }
 
 # Connect to i3
@@ -58,7 +61,7 @@ def update_workspace_names():
         logging.debug(f"Window Class: {win.window_class} (App: {app})")
 
         # Use icon based on app class
-        icon = APP_ICONS.get(app, "")  # Default icon if unknown
+        icon = APP_ICONS.get(app, "  ")  # Default icon if unknown
 
         # If the window is a terminal-based editor (Neovim, Vim, Emacs), use the code editor icon
         if any(editor in app for editor in ["neovim", "vim", "emacs", "kate"]):
