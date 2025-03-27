@@ -146,24 +146,32 @@ def init_bottom_bar():
             widget.CPU(
                 format="   {load_percent}%",
                 foreground=theme["green"],
+                font="CaskaydiaCove Nerd Font Bold",  # Make sure this font is installed
+                fontsize=13,  # Adjust size if needed
                 padding=6,
                 update_interval=2
             ),
             widget.Memory(
-                format="   {MemUsed: .0f}{mm}",
+                format="{MemUsed: .0f}{mm}",
                 foreground=theme["blue"],
+                font="CaskaydiaCove Nerd Font Bold",  # Make sure this font is installed
+                fontsize=13,  # Adjust size if needed
                 padding=6,
                 measure_mem="G"
             ),
             widget.Volume(
-                fmt="     {}",
+                fmt="  {}",
                 foreground=theme["accent"],
+                font="CaskaydiaCove Nerd Font Bold",  # Make sure this font is installed
+                fontsize=13,  # Adjust size if needed
                 padding=6,
                 volume_app="pavucontrol"
             ),
             widget.Clock(
                 foreground=theme["fg"],
-                format="   %I:%M %p",
+                format = " %A %e.%B   %I:%M:%S %p  ",
+                font="CaskaydiaCove Nerd Font Bold",  # Make sure this font is installed
+                fontsize=13,  # Adjust size if needed
                 padding=6
             ),
             widget.Systray(
@@ -188,7 +196,7 @@ def autostart():
         "picom",
         # "autotiling",
         "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1",
-        "xss-lock --transfer-sleep-lock -- betterlockscreen -l dimblur",
+        "xss-lock --transfer-sleep-lock -- betterlockscreen -l blur",
         "clipmenud",
     ]
     
