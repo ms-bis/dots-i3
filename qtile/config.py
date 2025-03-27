@@ -144,7 +144,7 @@ def init_bottom_bar():
                 padding=10
             ),
             widget.CPU(
-                format="   {load_percent}%",
+                format=" {load_percent}%",
                 foreground=theme["green"],
                 font="CaskaydiaCove Nerd Font Bold",  # Make sure this font is installed
                 fontsize=13,  # Adjust size if needed
@@ -169,7 +169,7 @@ def init_bottom_bar():
             ),
             widget.Clock(
                 foreground=theme["fg"],
-                format = " %A %e.%B   %I:%M:%S %p  ",
+                format = " %A %e.%B  %I:%M:%S %p  ",
                 font="CaskaydiaCove Nerd Font Bold",  # Make sure this font is installed
                 fontsize=13,  # Adjust size if needed
                 padding=6
