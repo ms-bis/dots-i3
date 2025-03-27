@@ -19,41 +19,6 @@ theme = {
     "gray": "#5c6370"        # Muted gray
 }
 
-# ========== App Icons Configuration ==========
-
-APP_ICONS: Dict[str, str] = {
-    "firefox": "󰈹",
-    "chrome": "",
-    "brave-browser": "",
-    "thorium-browser": "",
-    "chromium": "",
-    "telegram-desktop": "",
-    "code": "",
-    "alacritty": "",
-    "gnome-terminal": "",
-    "konsole": "",
-    "spotify": "",
-    "vlc": "󰕼",
-    "thunar": "",
-    "slack": "",
-    "neovim": "",
-    "vim": "",
-    "emacs": "",
-    "thunderbird": "",
-    "libreoffice": "",
-    "gimp": "",
-    "pavucontrol": "",
-    "simplescreenrecorder": "",
-    "mpv": "󰕼",
-    "nemo": "",
-    "nautilus": "",
-    "pcmanfm": "",
-    "obsidian": "",
-    "lutris": "",
-}
-
-TERMINAL_EDITORS = ["neovim", "vim", "emacs", "kate"]
-
 # ========== Core Configuration ==========
 mod = "mod4"
 terminal = "alacritty"
@@ -122,84 +87,6 @@ groups = [
     Group("9", label=" "),   # Chat
     Group("10", label=" "), # Settings
 ]
-
-# ========== Workspace Icon Management ==========
-def get_window_icon(window) -> str:
-    """Get the appropriate icon for a window with better matching."""
-    try:
-        wm_class = window.window.get_wm_class()
-        if wm_class:
-            for cls in wm_class:
-                lower_cls = cls.lower()
-                # Check for partial matches
-                for app, icon in APP_ICONS.items():
-                    if app in lower_cls:
-                        return icon
-                
-        # Check for terminal editors by window name
-        if any(editor in window.name.lower() for editor in TERMINAL_EDITORS):
-            return APP_ICONS["code"]
-            
-    except Exception:
-        pass
-    
-    return None  # Return None when no match found
-
-def update_workspace_names(qtile) -> None:
-    """Update workspace names based on window contents while keeping defaults."""
-    default_icons = {
-        "1": "", "2": "", "3": "", "4": "󰕼", "5": "",
-        "6": "", "7": "", "8": "", "9": "", "10": ""
-    }
-    
-    for group in qtile.groups:
-        icons = set()
-        base_num = group.name.split(":")[0].strip()
-        default_icon = default_icons.get(base_num, "")
-        
-        # Get windows in this workspace
-        for win in qtile.windows_map.values():
-            if win.group and win.group.name.split(":")[0].strip() == base_num:
-                icon = get_window_icon(win)
-                if icon:
-                    icons.add(icon)
-        
-        # Format new name - use default icon if no windows
-        if icons:
-            new_name = f"{base_num}: {' '.join(icons)}"
-        else:
-            new_name = f"{base_num}: {default_icon}"
-        
-        # Only update if changed
-        if new_name != group.name:
-            group.name = new_name
-            group.label = new_name
-            group.draw()
-
-# ========== Event Hooks ==========
-@hook.subscribe.client_new
-def on_window_new(window):
-    lazy.function(lambda qtile: update_workspace_names(qtile))(window.qtile)
-
-@hook.subscribe.client_killed
-def on_window_killed(window):
-    update_workspace_names(window.qtile)
-
-@hook.subscribe.client_focus
-def on_window_focus(window):
-    current_ws = window.qtile.current_group.name.split(":")[0].strip()
-    if window.group and window.group.name.split(":")[0].strip() != current_ws:
-        lazy.function(update_workspace_names)(window.qtile)
-
-@hook.subscribe.setgroup
-def on_workspace_change():
-    qtile = hook.qtile
-    lazy.function(update_workspace_names)(qtile)
-
-@hook.subscribe.startup_complete
-def on_startup():
-    qtile = hook.qtile
-    update_workspace_names(qtile)
 
 # ========== Layouts ==========
 layout_theme = {
@@ -297,8 +184,9 @@ screens = [Screen(bottom=init_bottom_bar())]
 def autostart():
     startup_commands = [
         "nitrogen --restore",
+        # "dex --autostart --environment qtil",
         "picom",
-        "autotiling",
+        # "autotiling",
         "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1",
         "xss-lock --transfer-sleep-lock -- betterlockscreen -l dimblur",
         "clipmenud",
